@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel Agent Enquiry Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .form-control::placeholder {
+      color: #5c5959;
+    }
+    
+    .submitbtn{
+        font-weight: bolder;
+        color: white;
+        background-color: #50a5e0;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        transition: all 0.5s ease;
+    }
+    .submitbtn:hover{
+        color: black;
+        background-color: #f49427;
+    }
+    .resetbtn{
+        font-weight: bolder;
+        color: white;
+        background-color: #50a5e0;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        transition: all 0.5s ease;
+    }
+    .resetbtn:hover{
+        color: black;
+        background-color: #f49427;
+    }
+
+    /* .................................................................... */
+    #child-ages label {
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    #child-ages input {
+      margin-bottom: 12px;
+    }
+    input:focus {
+      border-color: #0dcaf0;
+      box-shadow: 0 0 0 0.2rem rgba(13, 202, 240, 0.25);
+    }
+    /* ................................................................... */
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-12 col-lg-10 col-xl-10">
+      <h2 class="mb-4 text-center">Enquiry Form</h2>
+      <form>
+        <div class="row g-1">
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="name" class="px-2 py-2 "> Your Name: </label>
+            <input type="text" class="form-control border-0 py-2" placeholder="Enter Name" id="name" name="name" required>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="AgencyName" class="px-2 py-2 "> Agency Name: </label>
+            <input type="text" class="form-control border-0 py-2" placeholder="Enter Agency Name" id="AgencyName" name="AgencyName" required>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="Email" class="px-2 py-2 "> Email: </label>
+            <input type="text" class="form-control border-0 py-2" placeholder="Enter Email" id="Email" name="Email" required>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="Phone" class="px-2 py-2 "> Phone: </label>
+            <input type="text" class="form-control border-0 py-2" placeholder="Phone" id="Phone" name="Phone" required>
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="flyfrom" class="px-2 py-2">Fly From:</label>
+            <select class="form-control border-0 py-2" id="flyfrom" name="flyfrom" required>
+                <option value="Delhi "> Delhi  </option>
+                <option value="Mumbai "> Mumbai </option>
+                <option value="Varanasi "> Varanasi </option>
+                <option value="Kolkata"> Kolkata </option>
+                <option value="Hyderabad "> Hyderabad </option>
+                <option value="Chennai"> Chennai </option>
+                <option value="Bengaluru "> Bengaluru </option>
+                <option value="Ahmedabad "> Ahmedabad </option>
+                <option value="Lucknow "> Lucknow </option>
+                <option value="Jaipur "> Jaipur </option>
+                <option value="Amritsar "> Amritsar </option>
+                <option value="Cochin "> Cochin </option>
+            </select>
+          </div>
+          
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="flyto" class="px-2 py-2">Fly To:</label>
+            <select class="form-control border-0 py-2" id="flyto" name="flyto" required>
+                <option value="Singapore">Singapore</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Bali">Bali</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="UAE Dubai">UAE Dubai</option>
+                    <option value="HONG KONG">HONG KONG</option>
+                    <option value="TURKEY">TURKEY</option>
+                    <option value="EGYPT">EGYPT</option>
+                    <option value="AUSTRALIA">AUSTRALIA</option>
+            </select>
+          </div>   
+
+<!-- ----------------------------------------------------------------------------------------------------------------- -->
+
+<div class="container my-4">
+  <div class="col-12 col-md-12 col-lg-12 col-xl-12 rounded">
+    <label for="pax" class="px-2 py-2">No. Of Pax:</label>
+    <input type="number" id="pax" class="form-control" min="0" oninput="handlePaxChange()" />
+
+    <div id="child-section" class="mt-4" style="display: none;">
+      <div class="row">
+        <!-- Adults -->
+        <div class="col-12">
+          <label>Adults</label>
+          <input type="number" id="adults" class="form-control text-center" min="0" value="0" oninput="validateTotal()" />
+        </div>
+
+        <!-- Children -->
+        <div class="col-12 mt-3">
+          <label>Childs</label>
+          <input type="number" id="children" class="form-control text-center" min="0" value="0" oninput="handleChildrenChange(); validateTotal()" />
+        </div>
+      </div>
+
+      <!-- Dynamic Child Age Inputs -->
+      <div id="child-ages" class="mt-3"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------- -->
+
+          <!-- <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="pax" class="px-2 py-2 "> No. Of. Pax: </label>
+            <div class="row">
+                <div class="col-6 col-md-6 col-lg-6 col-xl-6"> Adults </div>
+                <div class="col-6 col-md-6 col-lg-6 col-xl-6"> Child </div> 
+            </div>
+          </div> -->
+
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="Requirement" class="px-2 py-2"> <b> Requirement: </b> </label>
+            <select class="form-control border-0 py-2" id="Requirement" name="Requirement" required>
+                <option value="Toure Package"> Toure Package </option>
+                    <option value="Land Package"> Land Package </option>
+            </select>
+          </div>   
+          
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+            <label for="Message" class="px-2 py-2 "> Message: </label>
+            <textarea class="form-control border-0 py-2 mt-2" rows="4" placeholder="Enter Message" id="Message" name="Message" required></textarea>
+          </div>
+
+          
+
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12 text-start mt-4">
+            <button type="reset" class="resetbtn px-5 py-2 form-control"> Reset </button>
+          </div>
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12 text-end mt-2">
+            <button type="submit" class="submitbtn px-5 py-2 form-control"> Submit </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- --------------------------------------------------------------------------------- -->
+
+<script>
+    function increase(id) {
+      const input = document.getElementById(id);
+      input.value = parseInt(input.value) + 1;
+    }
+  
+    function decrease(id) {
+      const input = document.getElementById(id);
+      if (parseInt(input.value) > 0) {
+        input.value = parseInt(input.value) - 1;
+      }
+    }
+
+
+    function handlePaxChange() {
+  const paxValue = document.getElementById('pax').value;
+  const childSection = document.getElementById('child-section');
+
+  if (paxValue !== "" && paxValue > 0) {
+    childSection.style.display = "block";
+  } else {
+    childSection.style.display = "none";
+  }
+}
+
+function handleChildrenChange() {
+  const numChildren = document.getElementById('children').value;
+  const childAgesDiv = document.getElementById('child-ages');
+  childAgesDiv.innerHTML = "";
+
+  for (let i = 1; i <= numChildren; i++) {
+  const label = document.createElement('label');
+  label.innerText = `${i}${getSuffix(i)} Child Age :`;
+  label.className = "form-label";
+
+  const input = document.createElement('input');
+  input.type = "number";
+  input.className = "form-control";
+  input.placeholder = `${i} Child Age (2 to 12 years)`;
+  input.min = 2;
+  input.max = 12;
+
+  // Event Listener lagaya direct input pe
+//   input.addEventListener('input', function() {
+//     const val = parseInt(this.value);
+//     if (val < 2 || val > 12) {
+//       alert('Please enter age between 2 and 12 years only!');
+//       this.value = '';
+//     }
+//   });
+
+  childAgesDiv.appendChild(label);
+  childAgesDiv.appendChild(input);
+}
+}
+
+function validateTotal() {
+  const pax = parseInt(document.getElementById('pax').value) || 0;
+  const adults = parseInt(document.getElementById('adults').value) || 0;
+  const children = parseInt(document.getElementById('children').value) || 0;
+  const total = adults + children;
+
+  if (total > pax) {
+    alert("please enter a valid number");
+    document.getElementById('adults').value = 0;
+    document.getElementById('children').value = 0;
+    document.getElementById('child-ages').innerHTML = "";
+  }
+}
+
+function getSuffix(i) {
+  if (i % 10 === 1 && i % 100 !== 11) return "st";
+  if (i % 10 === 2 && i % 100 !== 12) return "nd";
+  if (i % 10 === 3 && i % 100 !== 13) return "rd";
+  return "th";
+}
+  </script>
+
+
+
+<!-- --------------------------------------------------------------------------------- -->
+
+
+</body>
+</html>
